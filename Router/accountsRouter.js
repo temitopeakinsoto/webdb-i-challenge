@@ -38,4 +38,20 @@ router.get('/:id', async (req, res) => {
     }
   });
 
+  router.put('/:id', (req, res) => {
+      const { name, budget } = req.body;
+    db('accounts').where({ id: req.params.id })
+      .update({
+        name,
+        budget
+      })
+      .then(affectedRecords => {
+        console.log(affectedRecords);
+        res.json(affectedRecords + ' records got changed!' );
+      })
+      .catch(error => {
+        res.status(500).json({ message: 'this went wrong: ' + error.message });
+      });
+  });
+
 module.exports = router;
