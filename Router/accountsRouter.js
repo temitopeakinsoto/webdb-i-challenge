@@ -46,7 +46,6 @@ router.get('/:id', async (req, res) => {
         budget
       })
       .then(affectedRecords => {
-        console.log(affectedRecords);
         res.json(affectedRecords + ' records got changed!' );
       })
       .catch(error => {
@@ -55,12 +54,12 @@ router.get('/:id', async (req, res) => {
   });
 
   router.delete('/:id', (req, res) => {
-    db('posts').where({ id: req.params.id }).del()
+    db('accounts').where({ id: req.params.id }).del()
       .then(affectedRows => {
         res.json(affectedRows + ' rows got deleted!!');
       })
       .catch(error => {
-        res.status(500).json('this went wrong: ' + error.message)
+        res.status(500).json('Something went wrong with this delete operation: ' + error.message)
       })
   });
 
